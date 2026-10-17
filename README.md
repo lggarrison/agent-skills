@@ -49,6 +49,5 @@ by the next `npx skills update`.
 
 ## Contributing
 
-Each skill is `skills/<name>/SKILL.md`, with `name` and `description` frontmatter. Keep skills
-free of references to any one project, and keep relative links between skills
-(`../pr-review/SKILL.md`) working by installing linked skills together.
+Read [INTENTION.md](INTENTION.md) first. It says what belongs in this repo, what doesn't,
+and has a checklist for new or changed skills.
