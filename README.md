@@ -1,7 +1,8 @@
 # agent-skills
 
 General-purpose [agent skills](https://agentskills.io) for Claude Code, Cursor, GitHub
-Copilot, and other agents that read `SKILL.md` files.
+Copilot, and other agents that read `SKILL.md` files. Free for anyone to use under the
+[MIT License](LICENSE).
 
 | Skill                                                        | Use when                                                                                                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
@@ -49,5 +50,5 @@ by the next `npx skills update`.
 
 ## Contributing
 
-Read [INTENTION.md](INTENTION.md) first. It says what belongs in this repo, what doesn't,
-and has a checklist for new or changed skills.
+Issues and pull requests are welcome. Read [INTENTION.md](INTENTION.md) first. It says
+what belongs in this repo, what doesn't, and has a checklist for new or changed skills.

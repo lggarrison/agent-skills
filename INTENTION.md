@@ -5,14 +5,16 @@ skill, check it against this file first. If a change doesn't fit, it belongs som
 
 ## Purpose
 
-A small set of general-purpose agent skills that I use across my own projects, kept in one
-place so every project gets the same version and improvements land everywhere with
-`npx skills update`.
+A small set of general-purpose agent skills, shared publicly for anyone to use in their own
+projects. I use them across mine. Keeping them in one place means every project gets the
+same version, and improvements land everywhere with `npx skills update`.
 
 ## Ownership
 
-- I write these skills on my own time, on my own equipment, for my own projects.
-- They're published under the [MIT License](LICENSE). Anyone may use them.
+- I write these skills on my own time, on my own equipment.
+- They're published under the [MIT License](LICENSE), so anyone may use, change, and share
+  them.
+- Contributions must be the contributor's own work, free to share under the same license.
 
 ## What belongs here
 
@@ -27,10 +29,10 @@ place so every project gets the same version and improvements land everywhere wi
 
 ## What doesn't belong here
 
-- **Anything from an employer or client.** No code, docs, prompts, internal tool names,
-  hostnames, processes, or text copied or adapted from work repositories, work chats, or
-  work systems. Not even with names changed. If I'm unsure where something came from, I
-  write it fresh instead of copying it.
+- **Anything from an employer or client,** mine or a contributor's. No code, docs, prompts,
+  internal tool names, hostnames, processes, or text copied or adapted from work
+  repositories, work chats, or work systems. Not even with names changed. When it's unclear
+  where something came from, write it fresh instead of copying it.
 - **Project-specific rules.** Where a project keeps its roadmaps, which commands check its
   wiki, its domain rules: those go in that project's `AGENTS.md`, `CLAUDE.md`, or its own
   local skills. Every skill here tells the agent that the repo's own rules win.
@@ -59,7 +61,7 @@ place so every project gets the same version and improvements land everywhere wi
 
 ## Checklist for a new or changed skill
 
-- [ ] Written here or in one of my personal projects, not taken from work.
+- [ ] The author's own work, not taken from an employer or client.
 - [ ] Useful in more than one repository.
 - [ ] No project names, paths, scripts, secrets, or personal data.
 - [ ] Defers to the repo's own rules.
