@@ -12,6 +12,11 @@ the date they landed.
 - `SECURITY.md`, `CONTRIBUTING.md`, this changelog, PR and issue templates, Dependabot,
   and a CI workflow that runs `npm run check`.
 
+### Changed
+
+- `github`: branch slugs describe what the branch changes, never a random or generated
+  name.
+
 ## 2026-10-17
 
 ### Added

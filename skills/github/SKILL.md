@@ -92,8 +92,10 @@ gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_
    ```
 
    Name the branch `<type>/<short-slug>` (`feat/`, `fix/`, `docs/`, `chore/`, `refactor/`,
-   `test/`) unless the repo uses another scheme. Add the issue number if there is one
-   (`fix/issue-42-null-deck`).
+   `test/`) unless the repo uses another scheme. The slug says what the branch changes, in
+   two to five lowercase words joined by hyphens, so someone reading only the branch list
+   can tell what's on it: `fix/null-deck-crash`, not `fix/patch-1` or a random or generated
+   name. Add the issue number if there is one (`fix/issue-42-null-deck-crash`).
 
 3. **Commit.** Follow the repo's commit style. Check `git log --oneline -20`, and use
    [Conventional Commits](https://www.conventionalcommits.org/) when the history does.
