@@ -56,3 +56,14 @@ by the next `npx skills update`.
 
 Issues and pull requests are welcome. Read [INTENTION.md](INTENTION.md) first. It says
 what belongs in this repo, what doesn't, and has a checklist for new or changed skills.
+[CONTRIBUTING.md](CONTRIBUTING.md) covers setup, the checks to run, and branch and commit
+conventions. Changes are recorded in [CHANGELOG.md](CHANGELOG.md).
+
+## Security
+
+Report security problems privately, as described in [SECURITY.md](SECURITY.md). Don't
+open a public issue.
+
+## License
+
+[MIT](LICENSE)

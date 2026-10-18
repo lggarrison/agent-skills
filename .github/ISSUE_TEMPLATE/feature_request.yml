@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest a new skill or a change to an existing one
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Skills here have to work in any repository. Read [INTENTION.md](https://github.com/lggarrison/agent-skills/blob/main/INTENTION.md) for what belongs here and what doesn't.
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: The skill to change, or "new" for a new skill.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: What agents get wrong or can't do today, not the solution yet.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: The guidance you'd like the skill to give, and when it should apply.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Workarounds you use today, such as rules in a project's own AGENTS.md or CLAUDE.md.
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Anything else that helps explain the request.
