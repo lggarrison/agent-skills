@@ -1,6 +1,6 @@
 ---
 name: e2e-testing
-description: Writes, debugs, and reviews end-to-end tests that drive a whole app through a browser, a CLI, or an API the way a user would. Covers choosing which journeys deserve an e2e test, stable locators, waiting on conditions instead of time, isolated test data, debugging failures from traces, and fixing flaky tests at the cause. Examples use Playwright. Use when adding or changing an e2e test, an e2e test fails or is flaky in CI, or reviewing e2e tests in a diff.
+description: Writes, debugs, and reviews end-to-end tests that drive a whole app through a browser, a CLI, or an API the way a user would. Covers choosing which journeys deserve an e2e test, stable locators, waiting on conditions instead of time, isolated test data, debugging failures from traces, and fixing flaky tests at the cause. Defaults to Playwright when a repo has no e2e tool yet. Use when adding or changing an e2e test, an e2e test fails or is flaky in CI, or reviewing e2e tests in a diff.
 ---
 
 # End-to-end testing
@@ -20,7 +20,14 @@ Use the repository's e2e framework, config, folder, fixtures, and scripts. Read 
 existing tests and the config (`playwright.config.*`, `cypress.config.*`, and so on)
 before writing one, and match them. `AGENTS.md`, `CONTRIBUTING.md`, and the package
 scripts say how e2e tests are run and against what. Where they conflict with this skill,
-they win. Examples here use Playwright. Apply the same rules with the repo's tool.
+they win. Don't add a second e2e framework.
+
+## Default tool
+
+When the repo has no e2e tool yet, use [Playwright](https://playwright.dev)
+(`@playwright/test`) for anything with a browser. It works for any web app, whatever
+language the backend is written in. Examples here use Playwright. The rules apply with
+any tool.
 
 ## What deserves an e2e test
 
@@ -78,7 +85,9 @@ slow CI machine and waste time on a fast one.
 
 ## CLI and API end-to-end tests
 
-The same rules apply without a browser:
+The same rules apply without a browser. Run CLI tests with the repo's unit test runner
+(Vitest for JavaScript and TypeScript), in a separate config or project so they don't slow
+down the unit suite. API tests can use Playwright's `request` fixture, or the same runner.
 
 - Run the built artifact, the same way users run it, not the source through a test-only
   entry point.

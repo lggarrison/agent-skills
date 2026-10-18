@@ -1,6 +1,6 @@
 ---
 name: unit-testing
-description: Writes, fixes, and reviews unit tests that check behavior, fail when the code is wrong, and give the same result on every run. Covers proving a test can fail, test-first bug fixes, what to mock, removing nondeterminism, and fixing a failing test without weakening it. Use when adding or changing code that needs tests, fixing a bug, a unit test is failing or flaky, or reviewing tests in a diff.
+description: Writes, fixes, and reviews unit tests that check behavior, fail when the code is wrong, and give the same result on every run. Defaults to Vitest for JavaScript and TypeScript when a repo has no test runner yet. Covers proving a test can fail, test-first bug fixes, what to mock, removing nondeterminism, and fixing a failing test without weakening it. Use when adding or changing code that needs tests, fixing a bug, a unit test is failing or flaky, or reviewing tests in a diff.
 ---
 
 # Unit testing
@@ -20,6 +20,12 @@ Use the repository's test runner, file layout, naming, helpers, and fixtures. Re
 existing tests near the code before writing one, and match them. `AGENTS.md`,
 `CONTRIBUTING.md`, and the package scripts say how tests are run. Where they conflict with
 this skill, they win. Don't add a second test framework or assertion library.
+
+## Default tool
+
+When the repo has no unit test runner yet, use [Vitest](https://vitest.dev) for JavaScript
+and TypeScript. For other languages, use the ecosystem's standard runner, such as pytest
+for Python or `go test` for Go. Examples here use Vitest. The rules apply with any runner.
 
 ## What to test
 
@@ -50,8 +56,8 @@ coverage number.
 - **Await everything async.** A test that starts a promise and doesn't await it, or
   asserts inside a callback that never runs, passes without checking anything.
 - **No logic in tests.** No loops or conditionals that decide what to assert. Use the
-  runner's parameterized tests (`test.each`, `@pytest.mark.parametrize`, table tests)
-  for many cases.
+  runner's parameterized tests for many cases: `test.each` in Vitest,
+  `@pytest.mark.parametrize` in pytest, table tests in Go.
 
 ## Prove it can fail
 
@@ -75,7 +81,10 @@ Replace things at the edges of the system, not inside it:
 
 Prefer a small fake (an in-memory store, a fixed clock) over a mock that scripts every
 call. Where the code reads the time, a random value, or the environment, pass it in or
-use the runner's fake timers, rather than patching globals ad hoc.
+use the runner's tools, rather than patching globals ad hoc. In Vitest that's
+`vi.useFakeTimers()` and `vi.setSystemTime()` for time, and `vi.stubEnv()` for
+environment variables. Mock a module at a boundary with `vi.mock()`, and restore mocks
+after each test (`vi.restoreAllMocks()`, or `restoreMocks: true` in the config).
 
 ## Same answer every run
 
@@ -92,7 +101,8 @@ Remove the usual causes:
 - **Waiting:** never `sleep` to wait for async work. Await it, or advance fake timers.
 
 To check a fix for a flaky test, run that test many times in a row, and in random order if
-the runner supports it, before calling it fixed.
+the runner supports it, before calling it fixed. In Vitest, give the test a `repeats`
+option and run the suite with `--sequence.shuffle`.
 
 ## When a test fails
 
