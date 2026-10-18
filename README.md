@@ -10,6 +10,7 @@ Copilot, and other agents that read `SKILL.md` files. Free for anyone to use und
 | [`pr-review`](skills/pr-review/SKILL.md)                     | Reviewing a PR or diff, or re-reviewing after new commits: what to flag, severity, and converging over rounds            |
 | [`generating-roadmaps`](skills/generating-roadmaps/SKILL.md) | Creating, updating, or reviewing a project roadmap                                                                       |
 | [`wiki`](skills/wiki/SKILL.md)                               | Creating, ingesting into, querying, or maintaining a project wiki                                                        |
+| [`repo-setup`](skills/repo-setup/SKILL.md)                   | Bootstrapping a new repo, or auditing one for its license, security policy, templates, CI, and tooling                   |
 
 `github` and `pr-review` refer to each other, so install them together.
 
