@@ -88,12 +88,20 @@ gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_
 
    ```bash
    git fetch origin <base>
-   git checkout -b <type>/<short-slug> origin/<base>
+   git checkout -b <type>/<name>/<branch-description> origin/<base>
    ```
 
-   Name the branch `<type>/<short-slug>` (`feat/`, `fix/`, `docs/`, `chore/`, `refactor/`,
-   `test/`) unless the repo uses another scheme. Add the issue number if there is one
-   (`fix/issue-42-null-deck`).
+   Name the branch `<type>/<name>/<branch-description>` unless the repo uses another
+   scheme, for example `feature/alex/csv-export` or `fix/sam/null-deck-crash`.
+   - `<type>` is one of `feature`, `fix`, `docs`, `chore`, `refactor`, or `test`.
+   - `<name>` is the person the work is for, as one lowercase word: the name they go by,
+     or their first name from `git config user.name`. Don't use an agent's or bot's name
+     (`claude`, `copilot`). If neither gives a person's name, use their GitHub login
+     (`gh api user -q .login`).
+   - `<branch-description>` says what the branch changes, in two to five lowercase words
+     joined by hyphens, so someone reading only the branch list can tell what's on it.
+     Never use a random or generated name, or one like `patch-1`. Add the issue number if
+     there is one (`fix/sam/issue-42-null-deck-crash`).
 
 3. **Commit.** Follow the repo's commit style. Check `git log --oneline -20`, and use
    [Conventional Commits](https://www.conventionalcommits.org/) when the history does.

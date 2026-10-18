@@ -1,6 +1,6 @@
 ---
 name: pr-review
-description: 'Code review rules for pull requests. Use when reviewing a PR or a diff, or re-reviewing a PR after new commits: what to flag, the severity bar, the comment format, and how to converge over review rounds instead of raising new minor issues every time.'
+description: "Code review rules for pull requests. Use when reviewing a PR or a diff, or re-reviewing a PR after new commits: what to flag, the severity bar, the comment format, and how to converge over review rounds instead of raising new minor issues every time."
 ---
 
 # PR review

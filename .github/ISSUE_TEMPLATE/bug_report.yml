@@ -1,0 +1,51 @@
+name: Bug report
+description: Report a skill that leads an agent to do the wrong thing
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. For a security vulnerability, don't use this form.
+        Follow the [security policy](https://github.com/lggarrison/agent-skills/security/policy) instead.
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: The skill involved, for example `github` or `pr-review`.
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What the agent did, and what you expected it to do instead. Quote the passage in the skill if you know which one.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: What you asked the agent, and anything about the repository that mattered.
+      placeholder: |
+        1. Ask the agent to "..."
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and version
+      placeholder: e.g. Claude Code 2.x, Cursor, GitHub Copilot in VS Code
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Skill version
+      description: The commit of this repository you installed or last updated from, if you know it.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output
+      description: The agent's output or transcript excerpt. Remove secrets and private details first.
+      render: text
