@@ -82,9 +82,15 @@ Replace things at the edges of the system, not inside it:
 Prefer a small fake (an in-memory store, a fixed clock) over a mock that scripts every
 call. Where the code reads the time, a random value, or the environment, pass it in or
 use the runner's tools, rather than patching globals ad hoc. In Vitest that's
-`vi.useFakeTimers()` and `vi.setSystemTime()` for time, and `vi.stubEnv()` for
-environment variables. Mock a module at a boundary with `vi.mock()`, and restore mocks
-after each test (`vi.restoreAllMocks()`, or `restoreMocks: true` in the config).
+`vi.useFakeTimers()` and `vi.setSystemTime()` for time, `vi.stubEnv()` for environment
+variables, `vi.spyOn()` for a single function, and `vi.mock()` for a module at a boundary.
+Each needs its own cleanup after every test, because one doesn't undo the others:
+
+- fake timers: `vi.useRealTimers()`;
+- environment: `vi.unstubAllEnvs()`, or `unstubEnvs: true` in the config;
+- spies: `vi.restoreAllMocks()`, or `restoreMocks: true` in the config;
+- `vi.mock()` applies to the whole test file, so put tests that need the real module in
+  another file.
 
 ## Same answer every run
 
