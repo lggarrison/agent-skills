@@ -1,0 +1,53 @@
+name: Bug report
+description: Report something in <project> that doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. For a security vulnerability, don't use this form.
+        Follow the [security policy](https://github.com/<owner>/<repo>/security/policy) instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you saw, and what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The exact commands or actions, with a minimal example if you can.
+      placeholder: |
+        1. Run `...`
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The release, tag, or commit you're using.
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime version
+      description: The output of `<runtime-version-command>`.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: e.g. macOS 15, Windows 11, Ubuntu 24.04
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output
+      description: Error messages, logs, or a stack trace. Rerun with debug output on if the project supports it.
+      render: shell

@@ -10,8 +10,12 @@ Copilot, and other agents that read `SKILL.md` files. Free for anyone to use und
 | [`pr-review`](skills/pr-review/SKILL.md)                     | Reviewing a PR or diff, or re-reviewing after new commits: what to flag, severity, and converging over rounds            |
 | [`generating-roadmaps`](skills/generating-roadmaps/SKILL.md) | Creating, updating, or reviewing a project roadmap                                                                       |
 | [`wiki`](skills/wiki/SKILL.md)                               | Creating, ingesting into, querying, or maintaining a project wiki                                                        |
+| [`repo-setup`](skills/repo-setup/SKILL.md)                   | Bootstrapping a new repo, or auditing one for its license, security policy, templates, CI, and tooling                   |
+| [`unit-testing`](skills/unit-testing/SKILL.md)               | Writing, fixing, or reviewing unit tests, including bug-fix tests and flaky tests                                        |
+| [`e2e-testing`](skills/e2e-testing/SKILL.md)                 | Writing, debugging, or reviewing browser, CLI, or API end-to-end tests, including flaky ones                             |
 
-`github` and `pr-review` refer to each other, so install them together.
+`github` and `pr-review` refer to each other, so install them together. The same goes for
+`unit-testing` and `e2e-testing`.
 
 ## Install
 
