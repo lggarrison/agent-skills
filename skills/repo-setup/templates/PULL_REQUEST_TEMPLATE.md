@@ -17,14 +17,10 @@ APIs, config, or what gets published.
 ## Diagram (optional)
 
 <!--
-For a non-trivial flow, architecture, or before/after behavior, a Mermaid diagram renders
-inline on GitHub. Delete this section if a diagram wouldn't make the change clearer.
+For a non-trivial flow, architecture, or before/after behavior, add a fenced code block
+tagged `mermaid` (for example a `flowchart LR`). GitHub renders it inline. Delete this
+section if a diagram wouldn't make the change clearer.
 -->
-
-```mermaid
-flowchart LR
-  input["Input"] --> step["What this PR changes"] --> output["Result"]
-```
 
 ## How to verify
 

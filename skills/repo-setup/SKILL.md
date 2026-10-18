@@ -207,5 +207,6 @@ For projects released to a package registry. These are opt for everything else.
 | [`templates/ISSUE_TEMPLATE/feature_request.yml`](templates/ISSUE_TEMPLATE/feature_request.yml) | `.github/ISSUE_TEMPLATE/feature_request.yml` |
 | [`templates/ISSUE_TEMPLATE/config.yml`](templates/ISSUE_TEMPLATE/config.yml)                   | `.github/ISSUE_TEMPLATE/config.yml`          |
 
-Placeholders are written `<like-this>`. The commands in the templates are examples from a
-Node.js project. Replace them with the repo's own.
+Placeholders are written `<like-this>`. For example, replace `<runtime-version-command>`
+with `node --version`, `python --version`, or `go version`. The other commands in the
+templates are examples from a Node.js project. Replace them with the repo's own.

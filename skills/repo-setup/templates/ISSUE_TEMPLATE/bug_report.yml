@@ -35,7 +35,7 @@ body:
     id: runtime
     attributes:
       label: Runtime version
-      description: For example, the output of `node --version`.
+      description: The output of `<runtime-version-command>`.
     validations:
       required: true
   - type: input
