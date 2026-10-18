@@ -14,8 +14,10 @@ the date they landed.
 
 ### Changed
 
-- `github`: branch slugs describe what the branch changes, never a random or generated
-  name.
+- `github`: branches are named `<type>/<name>/<branch-description>`, for example
+  `feature/alex/csv-export`, and the description says what the branch changes, never a
+  random or generated name. Types are `feature`, `fix`, `docs`, `chore`, `refactor`, and
+  `test`, so `feat/` is now `feature/`.
 
 ## 2026-10-17
 

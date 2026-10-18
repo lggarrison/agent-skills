@@ -42,9 +42,10 @@ It runs:
 ## Branches and commits
 
 - Branch from `main` and open pull requests against `main`.
-- Name branches `<type>/<your-name>/<short-slug>`, for example
-  `feature/lacy/add-security-policy`. Types are `feature`, `fix`, `docs`, and `chore`. The
-  slug describes what the branch changes in a few hyphenated words, never a random or
+- Name branches `<type>/<your-name>/<branch-description>`, for example
+  `feature/lacy/add-security-policy`, as the
+  [`github` skill](skills/github/SKILL.md#creating-a-pr-from-a-branch) describes. The
+  description says what the branch changes in a few hyphenated words, never a random or
   generated name.
 - Write commit messages as a short imperative sentence, for example
   `Add a branch-naming rule to the github skill`. Keep each commit to one logical change.
