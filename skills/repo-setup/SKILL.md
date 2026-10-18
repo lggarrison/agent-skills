@@ -148,9 +148,11 @@ everything" command, and a CI matrix.
 - **R** `package.json` `repository`, `homepage`, `bugs`, `license`, and `author`.
 - **rec** `"type": "module"` for native ESM.
 
-**TypeScript**
+**TypeScript** (TypeScript projects only)
 
 - **R** `typescript` and a `tsconfig.json`, with an `npm run build` that compiles.
+- Don't convert a JavaScript project to TypeScript. For a new project, whether to use
+  TypeScript is the user's call.
 
 **Format and lint**
 
