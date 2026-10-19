@@ -22,8 +22,8 @@ the date they landed.
   the user whether to watch the PR. Copilot review requests now have their own section,
   which skips duplicate requests and says which effort level ran.
 - `github`: Copilot comments that hold up are fixed and replied to, nits included, and
-  each round of fixes gets a new Copilot review, up to five rounds (was three) unless the
-  user asks for more.
+  each round of fixes gets a new Copilot review, up to three rounds unless the user
+  asks for more.
 
 ## 2026-10-17
 

@@ -1,6 +1,6 @@
 ---
 name: github
-description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Lite Copilot review and ask the user whether to watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review, up to five Copilot rounds unless the user asks for more. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
+description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Lite Copilot review and ask the user whether to watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review, up to three Copilot rounds unless the user asks for more. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
 ---
 
 # GitHub pull requests
@@ -126,7 +126,7 @@ gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_
 9. **Request a Lite Copilot review.** Skip this for a draft PR, and when the user or the
    repo's rules say not to. Otherwise follow
    [Requesting a Copilot review](#requesting-a-copilot-review). This counts as the first
-   of the five Copilot rounds.
+   of the three Copilot rounds.
 10. **Report back.** Give the user the PR URL, and whether a Copilot review was requested
     and at which effort level.
 11. **Ask whether to watch the PR.** Ask the user if they'd like you to watch it: fix CI
@@ -317,9 +317,9 @@ Ask for another review when this round pushed a commit that fixed one or more Co
 comments, or changed behavior. Don't ask again when Copilot's latest review left no
 comments, or every one was **Won't fix** or **Already done**. The PR has converged.
 
-Stop after **five** Copilot rounds on the same PR, counting the review requested when the
-PR was opened, unless the user asks for more. Still fix and reply to the fifth round's
-comments, but don't request a sixth review on your own. Tell the user the limit was
+Stop after **three** Copilot rounds on the same PR, counting the review requested when the
+PR was opened, unless the user asks for more. Still fix and reply to the third round's
+comments, but don't request a fourth review on your own. Tell the user the limit was
 reached and what's still open, and ask whether they want more rounds. If they do, keep
 going up to the number they give. The limit stops Copilot from keeping the loop going
 with smaller and smaller issues.
@@ -371,7 +371,7 @@ green", including when they say yes after you open a PR (see
 [Creating a PR from a branch](#creating-a-pr-from-a-branch)). The goal is a PR that's
 mergeable: CI green on the latest commit, no merge conflict, and no open comment waiting
 on you. While watching, fix and reply to each new Copilot review as it lands and request
-the next one, up to the five-round limit in
+the next one, up to the three-round limit in
 [step 9](#9-request-a-new-copilot-review).
 
 ### How to get notified
