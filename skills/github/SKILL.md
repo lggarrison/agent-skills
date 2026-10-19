@@ -243,8 +243,10 @@ Rules for deciding:
   it's blocking. Treat optional or "nit" findings from other bots the same way: fix the
   plainly right ones only if you're already pushing a change, otherwise reply and leave
   them.
-- **Copilot comments that hold up are Fix,** nits included. Copilot gets a new review
-  after each round of fixes (step 9), so its comments converge instead of piling up.
+- **Copilot comments that hold up are Fix,** nits included. A Copilot nit on code the PR
+  changed doesn't need a failure scenario, only to be plainly right. Its other findings
+  still need one. Copilot gets a new review after each round of fixes (step 9), so its
+  comments converge instead of piling up.
 - Human reviewer asks that are small and local, such as renames, nits, an added test, or a
   single-function refactor, count as **Fix**. Large ones, such as multi-file refactors or
   open-ended design feedback, go to **Needs the user**.
@@ -357,10 +359,11 @@ concurrency).
    - MCP: `request_copilot_review` with owner, repo, and PR number.
    - CLI: `gh pr edit <n> --add-reviewer @copilot`. This needs a recent `gh`. If it fails,
      use `gh api -X POST repos/OWNER/REPO/pulls/<n>/requested_reviewers -f 'reviewers[]=copilot-pull-request-reviewer[bot]'`.
-   - **Effort level:** if the tool, `gh`, or the API takes an effort level, pass Lite.
-     Check its help or schema rather than guessing a flag name. If none does, the review
-     runs at the repo's or organization's default level. Request it anyway and tell the
-     user which level it ran at. Copilot's review overview says which.
+   - **Effort level:** if the tool, `gh`, or the API takes an effort level, pass the
+     level chosen above. Check its help or schema rather than guessing a flag name. If
+     none does, the review runs at the repo's or organization's default level. Request it
+     anyway and tell the user which level it ran at. Copilot's review overview says
+     which.
 3. **If Copilot code review isn't enabled** for the repo, the request fails. Say so
    instead of retrying.
 
