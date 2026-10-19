@@ -18,6 +18,9 @@ the date they landed.
   `feature/alex/csv-export`, and the description says what the branch changes, never a
   random or generated name. Types are `feature`, `fix`, `docs`, `chore`, `refactor`, and
   `test`, so `feat/` is now `feature/`.
+- `github`: after opening a PR, request a Copilot review at the Lite effort level and
+  start watching the PR. Copilot review requests now have their own section, which skips
+  duplicate requests and says which effort level ran.
 
 ## 2026-10-17
 

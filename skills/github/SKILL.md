@@ -1,6 +1,6 @@
 ---
 name: github
-description: "GitHub pull request workflow. Use when opening a PR from a branch, updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
+description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Lite Copilot review and watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
 ---
 
 # GitHub pull requests
@@ -123,7 +123,15 @@ gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_
 
 8. **Link issues.** Put `Closes #<n>` in the body for each issue the PR fully resolves, and
    `Refs #<n>` for partial work.
-9. **Report back.** Give the user the PR URL.
+9. **Request a Lite Copilot review.** Skip this for a draft PR, and when the user or the
+   repo's rules say not to. Otherwise follow
+   [Requesting a Copilot review](#requesting-a-copilot-review). This counts as the first
+   of the three Copilot rounds.
+10. **Start watching the PR.** Follow [Watching a PR](#watching-a-pr) unless the user said
+    not to, or the session can't get events or schedule a later turn. In that case, tell
+    the user you aren't watching and that they can ask you to check the PR later.
+11. **Report back.** Give the user the PR URL, whether a Copilot review was requested and
+    at which effort level, and whether you're watching the PR.
 
 ## Writing and updating the PR title and body
 
@@ -309,15 +317,10 @@ that met the bar. The PR has converged. After **three** Copilot rounds on the sa
 requesting Copilot reviews and tell the user what's still open, so review bots can't keep
 the loop going with smaller and smaller issues.
 
-After the push and replies, ask Copilot to review the new head:
-
-- MCP: `request_copilot_review` with owner, repo, and PR number.
-- CLI: `gh pr edit <n> --add-reviewer @copilot`. This needs a recent `gh`. If it fails,
-  use `gh api -X POST repos/OWNER/REPO/pulls/<n>/requested_reviewers -f 'reviewers[]=copilot-pull-request-reviewer[bot]'`.
-
-If Copilot code review isn't enabled for the repo, the request fails. Say so instead of
-retrying. Also re-request review from human reviewers whose "Request changes" you just
-addressed (`gh pr edit <n> --add-reviewer <login>`).
+After the push and replies, ask Copilot to review the new head as described in
+[Requesting a Copilot review](#requesting-a-copilot-review). Also re-request review from
+human reviewers whose "Request changes" you just addressed
+(`gh pr edit <n> --add-reviewer <login>`).
 
 ### 10. Report
 
@@ -330,14 +333,37 @@ Tell the user:
 - Whether Copilot review was requested.
 
 When Copilot's new review comes in, run the loop again from step 1. If it has nothing new
-to act on, stop there. If the user asked you
-to keep an eye on the PR, keep going as described in [Watching a PR](#watching-a-pr).
+to act on, stop there. If you opened the PR or the user asked you to keep an eye on it,
+keep going as described in [Watching a PR](#watching-a-pr).
+
+## Requesting a Copilot review
+
+Copilot code review runs at an effort level. **Lite** is a quick pass for straightforward
+changes. **Balanced** uses a stronger model and costs more. Ask for Lite unless the user
+asks for Balanced, or the change is large or risky (security, auth, data migrations,
+concurrency).
+
+1. **Don't double up.** Check the PR's requested reviewers and reviews first. If a Copilot
+   review is already requested or running on the current head, for example because the
+   repo asks Copilot to review every new PR, don't request another.
+2. **Request it:**
+   - MCP: `request_copilot_review` with owner, repo, and PR number.
+   - CLI: `gh pr edit <n> --add-reviewer @copilot`. This needs a recent `gh`. If it fails,
+     use `gh api -X POST repos/OWNER/REPO/pulls/<n>/requested_reviewers -f 'reviewers[]=copilot-pull-request-reviewer[bot]'`.
+   - **Effort level:** if the tool, `gh`, or the API takes an effort level, pass Lite.
+     Check its help or schema rather than guessing a flag name. If none does, the review
+     runs at the repo's or organization's default level. Request it anyway and tell the
+     user which level it ran at. Copilot's review overview says which.
+3. **If Copilot code review isn't enabled** for the repo, the request fails. Say so
+   instead of retrying.
 
 ## Watching a PR
 
-Run this when the user asks you to watch, monitor, or babysit a PR, or to "keep it green".
-The goal is a PR that's mergeable: CI green on the latest commit, no merge conflict, and no
-open comment waiting on you.
+Run this after you open a PR (see
+[Creating a PR from a branch](#creating-a-pr-from-a-branch)), and whenever the user asks
+you to watch, monitor, or babysit a PR, or to "keep it green". The goal is a PR that's
+mergeable: CI green on the latest commit, no merge conflict, and no open comment waiting
+on you.
 
 ### How to get notified
 
