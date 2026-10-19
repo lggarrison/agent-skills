@@ -22,9 +22,10 @@ the date they landed.
   `feature/alex/csv-export`, and the description says what the branch changes, never a
   random or generated name. Types are `feature`, `fix`, `docs`, `chore`, `refactor`, and
   `test`, so `feat/` is now `feature/`.
-- `github`: after opening a PR, request a Copilot review at the Lite effort level and ask
-  the user whether to watch the PR. Copilot review requests now have their own section,
-  which skips duplicate requests and says which effort level ran.
+- `github`: after opening a PR, request a Copilot review (Lite unless the user asks for
+  Balanced or the change is large or risky) and ask the user whether to watch the PR.
+  Copilot review requests now have their own section, which skips duplicate requests and
+  says which effort level ran.
 - `github`: Copilot comments that hold up are fixed and replied to, nits included, and
   each round of fixes gets a new Copilot review, up to three rounds unless the user
   asks for more.
