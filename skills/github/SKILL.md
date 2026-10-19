@@ -127,8 +127,9 @@ gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_
    repo's rules say not to. Otherwise follow
    [Requesting a Copilot review](#requesting-a-copilot-review). This counts as the first
    of the three Copilot rounds.
-10. **Report back.** Give the user the PR URL, and whether a Copilot review was requested
-    and at which effort level.
+10. **Report back.** Give the user the PR URL, and whether a Copilot review was requested.
+    Name the effort level only if you chose it in the request. Otherwise say it runs at
+    the repo's default, and don't wait for the review to finish to find out.
 11. **Ask whether to watch the PR.** Ask the user if they'd like you to watch it: fix CI
     failures, and fix and reply to Copilot's comments as they come in. Use the session's
     question tool if it has one. If they say yes, follow [Watching a PR](#watching-a-pr).
