@@ -13,6 +13,8 @@ the date they landed.
   and a CI workflow that runs `npm run check`.
 - `.claude/skills/` symlinks to each skill, so Claude Code loads this repository's own
   skills while working in it. `npm run check:skills` checks that every skill has one.
+- `.claude/skills/adding-a-skill`, a skill for this repository only, which walks agents
+  through adding or changing a skill so it fits `INTENTION.md` and passes the checks.
 
 ### Changed
 

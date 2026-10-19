@@ -34,6 +34,9 @@ It runs:
 
 ## Adding or changing a skill
 
+Agents working here get these steps from the repository-only
+[`adding-a-skill`](.claude/skills/adding-a-skill/SKILL.md) skill.
+
 - Work through the
   [checklist in INTENTION.md](INTENTION.md#checklist-for-a-new-or-changed-skill).
 - Add a line under `Unreleased` in [CHANGELOG.md](CHANGELOG.md).
