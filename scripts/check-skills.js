@@ -90,7 +90,9 @@ for (const name of readdirSync(skillsDir)) {
 
 const linked = existsSync(claudeSkillsDir) ? readdirSync(claudeSkillsDir) : [];
 for (const name of linked) {
-  if (!existsSync(join(skillsDir, name, "SKILL.md"))) {
+  // Repo-only skills can live here as real folders. Only links must match a skill.
+  const isLink = lstatSync(join(claudeSkillsDir, name)).isSymbolicLink();
+  if (isLink && !existsSync(join(skillsDir, name, "SKILL.md"))) {
     errors.push(`.claude/skills/${name}: no matching skills/${name}/SKILL.md`);
   }
 }
