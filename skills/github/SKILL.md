@@ -1,6 +1,6 @@
 ---
 name: github
-description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Lite Copilot review and ask the user whether to watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review, up to five Copilot rounds. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
+description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Lite Copilot review and ask the user whether to watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review, up to five Copilot rounds unless the user asks for more. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
 ---
 
 # GitHub pull requests
@@ -318,9 +318,11 @@ comments, or changed behavior. Don't ask again when Copilot's latest review left
 comments, or every one was **Won't fix** or **Already done**. The PR has converged.
 
 Stop after **five** Copilot rounds on the same PR, counting the review requested when the
-PR was opened. Still fix and reply to the fifth round's comments, but don't request a
-sixth review. Tell the user the limit was reached and what's still open, so Copilot can't
-keep the loop going with smaller and smaller issues.
+PR was opened, unless the user asks for more. Still fix and reply to the fifth round's
+comments, but don't request a sixth review on your own. Tell the user the limit was
+reached and what's still open, and ask whether they want more rounds. If they do, keep
+going up to the number they give. The limit stops Copilot from keeping the loop going
+with smaller and smaller issues.
 
 After the push and replies, ask Copilot to review the new head as described in
 [Requesting a Copilot review](#requesting-a-copilot-review). Also re-request review from
