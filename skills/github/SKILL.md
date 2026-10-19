@@ -1,6 +1,6 @@
 ---
 name: github
-description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Lite Copilot review and ask the user whether to watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review, up to three Copilot rounds unless the user asks for more. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
+description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Copilot review and ask the user whether to watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review, up to three Copilot rounds unless the user asks for more. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
 ---
 
 # GitHub pull requests
@@ -123,10 +123,10 @@ gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_
 
 8. **Link issues.** Put `Closes #<n>` in the body for each issue the PR fully resolves, and
    `Refs #<n>` for partial work.
-9. **Request a Lite Copilot review.** Skip this for a draft PR, and when the user or the
+9. **Request a Copilot review.** Skip this for a draft PR, and when the user or the
    repo's rules say not to. Otherwise follow
-   [Requesting a Copilot review](#requesting-a-copilot-review). This counts as the first
-   of the three Copilot rounds.
+   [Requesting a Copilot review](#requesting-a-copilot-review), which picks the effort
+   level. This counts as the first of the three Copilot rounds.
 10. **Report back.** Give the user the PR URL, and whether a Copilot review was requested.
     Name the effort level only if you chose it in the request. Otherwise say it runs at
     the repo's default, and don't wait for the review to finish to find out.
