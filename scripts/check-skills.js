@@ -1,5 +1,6 @@
 // Checks that every skill has valid frontmatter, a README entry, and a link in
-// `.claude/skills/`, and that relative links in Markdown files point at files that exist. Run with `npm run check:skills`.
+// `.claude/skills/`, and that relative links in Markdown files point at files that
+// exist. Run with `npm run check:skills`.
 
 import {
   existsSync,
@@ -87,9 +88,8 @@ for (const name of readdirSync(skillsDir)) {
   }
 }
 
-for (const name of existsSync(claudeSkillsDir)
-  ? readdirSync(claudeSkillsDir)
-  : []) {
+const linked = existsSync(claudeSkillsDir) ? readdirSync(claudeSkillsDir) : [];
+for (const name of linked) {
   if (!existsSync(join(skillsDir, name, "SKILL.md"))) {
     errors.push(`.claude/skills/${name}: no matching skills/${name}/SKILL.md`);
   }
