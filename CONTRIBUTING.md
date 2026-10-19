@@ -28,14 +28,20 @@ It runs:
 - `npm run format:check`: Prettier on every Markdown, YAML, and JSON file. Fix problems
   with `npm run format`.
 - `npm run check:skills`: every `skills/<name>/SKILL.md` has a `name` that matches its
-  folder and a `description`, every skill is in the README table, and every relative link
-  in a Markdown file points at a file that exists.
+  folder and a `description`, every skill is in the README table and linked from
+  `.claude/skills/`, and every relative link in a Markdown file points at a file that
+  exists.
 
 ## Adding or changing a skill
+
+Agents working here get these steps from the repository-only
+[`adding-a-skill`](.claude/skills/adding-a-skill/SKILL.md) skill.
 
 - Work through the
   [checklist in INTENTION.md](INTENTION.md#checklist-for-a-new-or-changed-skill).
 - Add a line under `Unreleased` in [CHANGELOG.md](CHANGELOG.md).
+- For a new skill, link it into `.claude/skills/` so Claude Code loads it while working in
+  this repository: `ln -s ../../skills/<name> .claude/skills/<name>`.
 - Try the skill in a real repository with at least one agent before opening the PR, and
   say in the PR which agent you used.
 
