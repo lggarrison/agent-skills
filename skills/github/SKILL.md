@@ -1,6 +1,6 @@
 ---
 name: github
-description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Lite Copilot review and watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
+description: "GitHub pull request workflow. Use when opening a PR from a branch (then request a Lite Copilot review and ask the user whether to watch the PR), updating a PR's title or body, or working through a PR review: read the PR and every comment, decide which comments are actionable, fix them, commit, push, update the PR body, reply to every comment, and request a new Copilot review, up to five Copilot rounds. Also use when asked to watch, monitor, or babysit a PR for new comments and CI failures until it's mergeable."
 ---
 
 # GitHub pull requests
@@ -126,12 +126,15 @@ gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "PRRT_
 9. **Request a Lite Copilot review.** Skip this for a draft PR, and when the user or the
    repo's rules say not to. Otherwise follow
    [Requesting a Copilot review](#requesting-a-copilot-review). This counts as the first
-   of the three Copilot rounds.
-10. **Start watching the PR.** Follow [Watching a PR](#watching-a-pr) unless the user said
-    not to, or the session can't get events or schedule a later turn. In that case, tell
-    the user you aren't watching and that they can ask you to check the PR later.
-11. **Report back.** Give the user the PR URL, whether a Copilot review was requested and
-    at which effort level, and whether you're watching the PR.
+   of the five Copilot rounds.
+10. **Report back.** Give the user the PR URL, and whether a Copilot review was requested
+    and at which effort level.
+11. **Ask whether to watch the PR.** Ask the user if they'd like you to watch it: fix CI
+    failures, and fix and reply to Copilot's comments as they come in. Use the session's
+    question tool if it has one. If they say yes, follow [Watching a PR](#watching-a-pr).
+    Skip the question when they already said whether to watch. If the session can't get
+    events or schedule a later turn, say you can't watch it on your own and that they can
+    ask you to check the PR later.
 
 ## Writing and updating the PR title and body
 
@@ -237,8 +240,11 @@ Rules for deciding:
   can't, don't fix it. Reply with the reasoning instead.
 - **Hold findings to the [`pr-review`](../pr-review/SKILL.md) bar.** A finding without a
   realistic failure scenario, or one on code the PR didn't change, is **Won't fix** unless
-  it's blocking. Treat optional or "nit" findings the same way: fix the plainly right ones
-  only if you're already pushing a change, otherwise reply and leave them.
+  it's blocking. Treat optional or "nit" findings from other bots the same way: fix the
+  plainly right ones only if you're already pushing a change, otherwise reply and leave
+  them.
+- **Copilot comments that hold up are Fix,** nits included. Copilot gets a new review
+  after each round of fixes (step 9), so its comments converge instead of piling up.
 - Human reviewer asks that are small and local, such as renames, nits, an added test, or a
   single-function refactor, count as **Fix**. Large ones, such as multi-file refactors or
   open-ended design feedback, go to **Needs the user**.
@@ -307,15 +313,14 @@ pushing so the replies can point to real commits.
 
 ### 9. Request a new Copilot review
 
-Ask for another review only when both of these are true:
+Ask for another review when this round pushed a commit that fixed one or more Copilot
+comments, or changed behavior. Don't ask again when Copilot's latest review left no
+comments, or every one was **Won't fix** or **Already done**. The PR has converged.
 
-- you pushed a new commit in this round, and
-- that commit fixed a **blocking** or **should fix** finding, or changed behavior.
-
-Don't ask again after a round that only fixed nits, or when the last review found nothing
-that met the bar. The PR has converged. After **three** Copilot rounds on the same PR, stop
-requesting Copilot reviews and tell the user what's still open, so review bots can't keep
-the loop going with smaller and smaller issues.
+Stop after **five** Copilot rounds on the same PR, counting the review requested when the
+PR was opened. Still fix and reply to the fifth round's comments, but don't request a
+sixth review. Tell the user the limit was reached and what's still open, so Copilot can't
+keep the loop going with smaller and smaller issues.
 
 After the push and replies, ask Copilot to review the new head as described in
 [Requesting a Copilot review](#requesting-a-copilot-review). Also re-request review from
@@ -333,8 +338,8 @@ Tell the user:
 - Whether Copilot review was requested.
 
 When Copilot's new review comes in, run the loop again from step 1. If it has nothing new
-to act on, stop there. If you opened the PR or the user asked you to keep an eye on it,
-keep going as described in [Watching a PR](#watching-a-pr).
+to act on, stop there. If the user asked you to watch the PR, keep going as described in
+[Watching a PR](#watching-a-pr).
 
 ## Requesting a Copilot review
 
@@ -359,11 +364,13 @@ concurrency).
 
 ## Watching a PR
 
-Run this after you open a PR (see
-[Creating a PR from a branch](#creating-a-pr-from-a-branch)), and whenever the user asks
-you to watch, monitor, or babysit a PR, or to "keep it green". The goal is a PR that's
+Run this when the user asks you to watch, monitor, or babysit a PR, or to "keep it
+green", including when they say yes after you open a PR (see
+[Creating a PR from a branch](#creating-a-pr-from-a-branch)). The goal is a PR that's
 mergeable: CI green on the latest commit, no merge conflict, and no open comment waiting
-on you.
+on you. While watching, fix and reply to each new Copilot review as it lands and request
+the next one, up to the five-round limit in
+[step 9](#9-request-a-new-copilot-review).
 
 ### How to get notified
 
