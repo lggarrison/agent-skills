@@ -1,12 +1,20 @@
-// Checks that every skill has valid frontmatter and a README entry, and that relative
-// links in Markdown files point at files that exist. Run with `npm run check:skills`.
+// Checks that every skill has valid frontmatter, a README entry, and a link in
+// `.claude/skills/`, and that relative links in Markdown files point at files that exist. Run with `npm run check:skills`.
 
-import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import {
+  existsSync,
+  lstatSync,
+  readdirSync,
+  readFileSync,
+  readlinkSync,
+  statSync,
+} from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const skillsDir = join(root, "skills");
+const claudeSkillsDir = join(root, ".claude", "skills");
 const errors = [];
 
 // Limits from the Agent Skills specification (https://agentskills.io).
@@ -68,6 +76,22 @@ for (const name of readdirSync(skillsDir)) {
   }
   if (!readme.includes(`(skills/${name}/SKILL.md)`)) {
     errors.push(`README.md: no entry for skills/${name}/SKILL.md`);
+  }
+  // Claude Code loads a repo's skills from `.claude/skills/`, so each skill is linked there.
+  const link = join(claudeSkillsDir, name);
+  const target = `../../skills/${name}`;
+  if (!lstatSync(link, { throwIfNoEntry: false })?.isSymbolicLink()) {
+    errors.push(`.claude/skills/${name}: missing symlink to ${target}`);
+  } else if (readlinkSync(link) !== target) {
+    errors.push(`.claude/skills/${name}: should link to ${target}`);
+  }
+}
+
+for (const name of existsSync(claudeSkillsDir)
+  ? readdirSync(claudeSkillsDir)
+  : []) {
+  if (!existsSync(join(skillsDir, name, "SKILL.md"))) {
+    errors.push(`.claude/skills/${name}: no matching skills/${name}/SKILL.md`);
   }
 }
 

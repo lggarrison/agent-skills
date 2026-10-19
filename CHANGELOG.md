@@ -11,6 +11,8 @@ the date they landed.
 
 - `SECURITY.md`, `CONTRIBUTING.md`, this changelog, PR and issue templates, Dependabot,
   and a CI workflow that runs `npm run check`.
+- `.claude/skills/` symlinks to each skill, so Claude Code loads this repository's own
+  skills while working in it. `npm run check:skills` checks that every skill has one.
 
 ### Changed
 
