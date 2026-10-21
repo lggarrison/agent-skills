@@ -24,7 +24,7 @@ this skill, they win. Roadmaps written with the
   file per release, `docs/`, and wiki or concept pages whose path contains `roadmap`.
   Search file paths for `roadmap` as well, since the root listing misses nested ones.
 - Read from the branch the repo says is current, which isn't always the default one.
-- Skip index pages, open-question lists, and pages with no work-item table. Tell the user
+- Skip index pages, open-question lists, and pages with no work items. Tell the user
   which files you skipped and why.
 - For a private repository, use the access the agent already has (the `gh` CLI, a git
   remote, or a browser session the user signed in to). Never ask the user to paste a token
@@ -33,26 +33,33 @@ this skill, they win. Roadmaps written with the
 
 ## Reading work items
 
-A work item is a row in a Markdown table whose header starts with `Id` and has a `Status`
-column. IDs look like `ADV-01` or `P0-04`. Skip open-question tables (IDs such as
-`OQ-01`).
+Work items come in two shapes, and one repo can use both:
+
+- **Sections**, as `generating-roadmaps` writes them: a heading such as
+  `### R-001: <title>`, followed by a `- **Status:** <status>` line.
+- **Table rows:** a row in a Markdown table whose header starts with `Id` and has a
+  `Status` column.
+
+IDs look like `R-001`, `ADV-01`, or `P0-04`. Skip open-decision and open-question tables
+(IDs such as `D-001` or `OQ-01`).
 
 Map each status to one of three groups. Show the original status too, so "blocked" isn't
 lost inside "not started".
 
-| Status in the file | Group       |
-| ------------------ | ----------- |
-| `✅`               | Completed   |
-| `in_progress`      | In progress |
-| `🟡` (partial)     | In progress |
-| `⬜`, `ready`      | Not started |
-| `🚧` (blocked)     | Not started |
-| `❓` (undefined)   | Not started |
-| `🚫` (retired)     | Not counted |
+| Status in the file           | Group       |
+| ---------------------------- | ----------- |
+| `done`, `✅`                 | Completed   |
+| `in-progress`, `in_progress` | In progress |
+| `🟡` (partial)               | In progress |
+| `planned`, `ready`, `⬜`     | Not started |
+| `blocked`, `🚧`              | Not started |
+| `❓` (undefined)             | Not started |
+| `dropped`, `🚫` (retired)    | Not counted |
 
 If a repo uses other statuses, ask the user how to group them rather than guessing.
 
-- An item's phase is the nearest heading above its table. Items under a "Completed"
+- An item's phase is the nearest heading above it that isn't its own: the phase heading
+  over an item's section, or the heading over its table. Items under a "Completed"
   heading keep the phase their ID prefix names.
 - Item IDs can repeat across roadmaps in one repo. Key each item by repo, roadmap, and ID
   together.
