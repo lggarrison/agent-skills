@@ -13,9 +13,11 @@ Copilot, and other agents that read `SKILL.md` files. Free for anyone to use und
 | [`repo-setup`](skills/repo-setup/SKILL.md)                   | Bootstrapping a new repo, or auditing one for its license, security policy, templates, CI, and tooling                   |
 | [`unit-testing`](skills/unit-testing/SKILL.md)               | Writing, fixing, or reviewing unit tests, including bug-fix tests and flaky tests                                        |
 | [`e2e-testing`](skills/e2e-testing/SKILL.md)                 | Writing, debugging, or reviewing browser, CLI, or API end-to-end tests, including flaky ones                             |
+| [`roadmap-dashboard`](skills/roadmap-dashboard/SKILL.md)     | Building or refreshing a dashboard of what's completed, in progress, and not started across a project's roadmaps         |
 
 `github` and `pr-review` refer to each other, so install them together. The same goes for
-`unit-testing` and `e2e-testing`.
+`unit-testing` and `e2e-testing`. `roadmap-dashboard` reads roadmaps in the format
+`generating-roadmaps` writes, so the two work well together.
 
 ## Install
 
