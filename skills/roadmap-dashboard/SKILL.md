@@ -37,8 +37,8 @@ Work items come in two shapes, and one repo can use both:
 
 - **Sections**, as `generating-roadmaps` writes them: a heading such as
   `### R-001: <title>`, followed by a `- **Status:** <status>` line.
-- **Table rows:** a row in a Markdown table whose header starts with `Id` and has a
-  `Status` column.
+- **Table rows:** a row in a Markdown table whose first header is `ID` in any case (`Id`,
+  `id`) and that has a `Status` column.
 
 IDs look like `R-001`, `ADV-01`, or `P0-04`. Skip open-decision and open-question tables
 (IDs such as `D-001` or `OQ-01`).
